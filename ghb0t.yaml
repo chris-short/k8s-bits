@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ghb0t
+  labels:
+    purpose: ghb0t
+spec:
+  containers:
+  - name: ghb0t-container
+    image: chrisshort/ghb0t
+    env:
+      - name: TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: ghb0t-api-key
+            key: token
+    args:
+      - "-token"
+      - "$(TOKEN)"
