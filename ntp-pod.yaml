@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ntp
+  labels:
+    purpose: ntp
+spec:
+  containers:
+  - name: ntp
+    image: chrisshort/ntp-alpine
+    command: ["ntpd", "-d", "-s"]
+#    securityContext:
+#      privileged: true
+    volumeMounts:
+      - name: config-volume
+        mountPath: /etc/ntpd.conf
+  volumes:
+    - name: config-volume
+      configMap:
+        name: ntp
